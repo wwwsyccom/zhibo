@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <!--主内容区-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fg_wrapper">
+    </FrameLayout>
+
+    <!--底部导航栏-->
+    <LinearLayout
+        android:id="@+id/ly_tab_menu"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            style="@style/tab_menu_rel">
+            <ImageView
+                style="@style/tab_menu_icon"
+                android:id="@+id/tab_menu_find_icon"
+                android:src="@drawable/tab_menu_find_icon"/>
+            <TextView
+                android:id="@+id/tab_menu_find"
+                android:layout_below="@id/tab_menu_find_icon"
+                style="@style/tab_menu_text"
+                android:text="@string/tab_menu_find" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/tab_menu_rel">
+            <ImageView
+                android:id="@+id/tab_menu_circle_icon"
+                style="@style/tab_menu_icon"
+                android:src="@drawable/tab_menu_circle_icon"/>
+            <TextView
+                android:id="@+id/tab_menu_circle"
+                style="@style/tab_menu_text"
+                android:layout_below="@id/tab_menu_circle_icon"
+                android:text="@string/tab_menu_circle" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/tab_menu_rel">
+            <ImageView
+                android:id="@+id/tab_menu_msg_icon"
+                style="@style/tab_menu_icon"
+                android:src="@drawable/tab_menu_msg_icon"/>
+            <TextView
+                android:id="@+id/tab_menu_msg"
+                style="@style/tab_menu_text"
+                android:layout_below="@id/tab_menu_msg_icon"
+                android:text="@string/tab_menu_msg" />
+            <TextView
+                android:id="@+id/tab_menu_msg_num"
+                style="@style/tab_menu_bgnum"
+                android:layout_toRightOf="@+id/tab_menu_msg_icon"
+                android:text="99+" />
+        </RelativeLayout>
+        <RelativeLayout style="@style/tab_menu_rel">
+            <ImageView
+                android:id="@+id/tab_menu_my_icon"
+                style="@style/tab_menu_icon"
+                android:src="@drawable/tab_menu_my_icon"/>
+            <TextView
+                android:id="@+id/tab_menu_my"
+                style="@style/tab_menu_text"
+                android:layout_below="@id/tab_menu_my_icon"
+                android:text="@string/tab_menu_my" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
