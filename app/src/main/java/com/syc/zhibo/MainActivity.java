@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fManager = getFragmentManager();
         //点亮首页图标
-        my.performClick();
+        circle.performClick();
 
     }
     public void onClick(View view){

@@ -1,4 +1,4 @@
-package com.syc.zhibo;
+package com.syc.zhibo.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.syc.zhibo.R;
 import com.syc.zhibo.model.User;
 
 import java.io.IOException;

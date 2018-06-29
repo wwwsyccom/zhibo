@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.syc.zhibo.adapter.HomeAdapter;
 import com.syc.zhibo.model.User;
 import com.syc.zhibo.util.SwipeRefreshView;
 

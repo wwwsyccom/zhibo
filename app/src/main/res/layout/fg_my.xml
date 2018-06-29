@@ -1,42 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <com.syc.zhibo.util.SquareRelLay
-        android:id="@+id/profile"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white">
-        <TextView
-            android:id="@+id/edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue2"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:text="编辑"/>
-        <com.syc.zhibo.util.CircleImageView
-            android:id="@+id/photo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            app:strokeWidth="0dp"
-            app:isCircle="true"
-            app:radius="5dp"
-            android:layout_centerHorizontal="true"
-            app:image="@mipmap/ic_launcher"
-            android:layout_marginTop="20dp">
-        </com.syc.zhibo.util.CircleImageView>
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/photo">
-        </TextView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:background="#F2F2F2">
 
-    </com.syc.zhibo.util.SquareRelLay>
+        <RelativeLayout
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:background="@color/white">
+            <TextView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="编辑"/>
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/photo"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                fresco:roundAsCircle="true" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="rocket"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/photo">
+            </TextView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/name"
+                android:layout_centerHorizontal="true">
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22岁 帅哥"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:background="@drawable/fg_my_age_back" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID:99999"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/fg_my_age_back" />
+            </LinearLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent">
+            <RelativeLayout
+                style="@style/fg_my_list">
+                <ImageView
+                    android:id="@+id/video_icon"
+                    style="@style/fg_my_list_icon"
+                    android:src="@mipmap/video" />
+                <TextView
+                    style="@style/fg_my_list_title"
+                    android:layout_toRightOf="@id/video_icon"
+                    android:text="视频接听"/>
+                <TextView
+                    style="@style/fg_my_list_title"
+                    android:layout_toLeftOf="@id/icon_right_video"
+                    android:textColor="@color/blue2"
+                    android:text="66豆/分钟"/>
+                <ImageView
+                    android:id="@+id/icon_right_video"
+                    style="@style/fg_my_list_icon_right"
+                    android:src="@mipmap/right_icon" />
+            </RelativeLayout>
+            <RelativeLayout
+                style="@style/fg_my_list">
+                <ImageView
+                    android:id="@+id/cert_icon"
+                    style="@style/fg_my_list_icon"
+                    android:src="@mipmap/fg_my_cert" />
+                <TextView
+                    style="@style/fg_my_list_title"
+                    android:layout_toRightOf="@id/cert_icon"
+                    android:text="视频认证"/>
+                <ImageView
+                    style="@style/fg_my_list_icon_right"
+                    android:src="@mipmap/right_icon" />
+            </RelativeLayout>
+            <RelativeLayout
+                style="@style/fg_my_list">
+                <ImageView
+                    android:id="@+id/comment_icon"
+                    style="@style/fg_my_list_icon"
+                    android:src="@mipmap/fg_my_comment" />
+                <TextView
+                    style="@style/fg_my_list_title"
+                    android:layout_toRightOf="@id/comment_icon"
+                    android:text="通话评价"/>
+                <ImageView
+                    style="@style/fg_my_list_icon_right"
+                    android:src="@mipmap/right_icon" />
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent">
+            <RelativeLayout
+                style="@style/fg_my_list">
+                <ImageView
+                    android:id="@+id/wallet_icon"
+                    style="@style/fg_my_list_icon"
+                    android:src="@mipmap/fg_my_wallet" />
+                <TextView
+                    style="@style/fg_my_list_title"
+                    android:layout_toRightOf="@id/wallet_icon"
+                    android:text="钱包"/>
+                <ImageView
+                    style="@style/fg_my_list_icon_right"
+                    android:src="@mipmap/right_icon" />
+            </RelativeLayout>
+            <RelativeLayout
+                style="@style/fg_my_list">
+                <ImageView
+                    android:id="@+id/gift_icon"
+                    style="@style/fg_my_list_icon"
+                    android:src="@mipmap/fg_my_gift" />
+                <TextView
+                    style="@style/fg_my_list_title"
+                    android:layout_toRightOf="@id/gift_icon"
+                    android:text="礼物"/>
+                <ImageView
+                    style="@style/fg_my_list_icon_right"
+                    android:src="@mipmap/right_icon" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent">
+            <RelativeLayout
+                style="@style/fg_my_list">
+                <ImageView
+                    android:id="@+id/logout_icon"
+                    style="@style/fg_my_list_icon"
+                    android:src="@mipmap/fg_my_exit" />
+                <TextView
+                    style="@style/fg_my_list_title"
+                    android:layout_toRightOf="@id/logout_icon"
+                    android:text="退出"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
