@@ -1,15 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txt_content"
+    <!--顶部导航-->
+    <RelativeLayout
+        android:id="@+id/nav"
         android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_height="45dp">
+        <RadioGroup
+            android:id="@+id/nav_group"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+            <RadioButton
+                android:id="@+id/nav_msg"
+                style="@style/fg_home_nav_item"
+                android:button="@null"
+                android:text="消息">
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/nav_calls"
+                style="@style/fg_home_nav_item"
+                android:button="@null"
+                android:text="所有通话">
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/nav_calls_missed"
+                style="@style/fg_home_nav_item"
+                android:button="@null"
+                android:text="未接来电">
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/nav_black"
+                style="@style/fg_home_nav_item"
+                android:button="@null"
+                android:layout_marginRight="0dp"
+                android:text="黑名单">
+            </RadioButton>
+        </RadioGroup>
+    </RelativeLayout>
+    <!--内容区-->
+    <ScrollView
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="msg"
-        android:textColor="@color/text_yellow"
-        android:textSize="20sp"/>
-
-</LinearLayout>
+        android:layout_below="@id/nav"
+        android:layout_width="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <!--<LinearLayout-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent">-->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingLeft="15dp"-->
+                <!--android:paddingRight="15dp"-->
+                <!--android:background="@drawable/fg_my_list_border_bottom"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<com.facebook.drawee.view.SimpleDraweeView-->
+                    <!--android:id="@+id/photo1"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:layout_width="40dp"-->
+                    <!--fresco:roundedCornerRadius="5dp"-->
+                    <!--fresco:roundTopLeft="true"-->
+                    <!--fresco:roundTopRight="true"-->
+                    <!--fresco:roundBottomLeft="true"-->
+                    <!--fresco:roundBottomRight="true"-->
+                    <!--fresco:placeholderImage="@mipmap/timg"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<TextView-->
+                    <!--android:id="@+id/name1"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_toRightOf="@id/photo1"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:text="火箭"-->
+                    <!--android:layout_width="wrap_content" />-->
+                <!--<TextView-->
+                    <!--android:id="@+id/msg1"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_toRightOf="@id/photo1"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:textColor="@color/text_gray"-->
+                    <!--android:textSize="12sp"-->
+                    <!--android:text="就哭了监考老师解答顾客来说尕斯库勒个建设快乐过"-->
+                    <!--android:layout_width="wrap_content" />-->
+                <!--<TextView-->
+                    <!--android:id="@+id/time1"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:textColor="@color/text_gray"-->
+                    <!--android:textSize="12sp"-->
+                    <!--android:text="12:12"-->
+                    <!--android:layout_width="wrap_content" />-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+    </ScrollView>
+</RelativeLayout>

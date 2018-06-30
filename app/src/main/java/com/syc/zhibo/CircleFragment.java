@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CircleFragment extends Fragment implements RadioGroup.OnCheckedChangeListener{
-    private RadioGroup navGroup;
     private RadioButton navAll;
     private SwipeRefreshView mSwipeRefreshView;
     private CircleAdapter adapter;
@@ -34,7 +33,7 @@ public class CircleFragment extends Fragment implements RadioGroup.OnCheckedChan
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Fresco.initialize(getActivity());
         View view = inflater.inflate(R.layout.fg_circle,container,false);
-        navGroup = (RadioGroup) view.findViewById(R.id.nav_group);
+//        RadioGroup navGroup = (RadioGroup) view.findViewById(R.id.nav_group);
         navAll= (RadioButton) view.findViewById(R.id.nav_all);
         navAll.setChecked(true);
 

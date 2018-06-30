@@ -48,7 +48,7 @@
         android:id="@+id/msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="将拉开是根据撒了根据撒开了感觉阿斯利康个阿斯顿开工建设快乐的工时" />
+        android:text="" />
     <LinearLayout
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"

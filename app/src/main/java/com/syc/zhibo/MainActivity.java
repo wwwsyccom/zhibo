@@ -3,6 +3,7 @@ package com.syc.zhibo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        startActivity(new Intent(this, DetailActivity.class));
+
         findIcon = (ImageView) findViewById(R.id.tab_menu_find_icon);
         circleIcon = (ImageView) findViewById(R.id.tab_menu_circle_icon);
         msgIcon = (ImageView) findViewById(R.id.tab_menu_msg_icon);
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fManager = getFragmentManager();
         //点亮首页图标
-        circle.performClick();
+        find.performClick();
 
     }
     public void onClick(View view){

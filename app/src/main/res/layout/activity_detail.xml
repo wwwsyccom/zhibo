@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    android:layout_width="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_above="@id/nav"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!--顶部大图-->
+            <com.syc.zhibo.util.SquareViewPager
+                android:id="@+id/photo_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <!--小图片区-->
+            <HorizontalScrollView
+                android:id="@+id/photo_small_wrapper"
+                android:layout_width="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none"
+                android:background="@color/white"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/photo_small_wrapper2"
+                    android:layout_width="100dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content">
+                </LinearLayout>
+            </HorizontalScrollView>
+            <!--简介-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="8dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@mipmap/detail_profile_tag"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="20dp" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:text="个人动态"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_gray"
+                        android:layout_gravity="center"
+                        android:text="发表 9 >"
+                        android:layout_marginRight="20dp"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_gray"
+                        android:layout_gravity="center"
+                        android:text="照片 9 >"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@mipmap/detail_profile_comment"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="20dp" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:text="通话评价"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="好评度 90%"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000条评论>"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@mipmap/detail_profile_msg"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="20dp" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:text="聊天标准"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="视频 100遇豆/分钟"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@mipmap/detail_profile_total"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="20dp" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:text="通话时长"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000分钟"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:src="@mipmap/detail_profile_tag"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="20dp" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:gravity="start"
+                        android:text="个人标签"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000分钟"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!--底部导航-->
+    <LinearLayout
+        android:id="@+id/nav"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/nav_border_top"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/gift_icon"
+                style="@style/detail_nav_icon"
+                android:src="@mipmap/detail_gift" />
+            <TextView
+                android:id="@+id/gift_txt"
+                android:text="送礼物"
+                android:layout_below="@id/gift_icon"
+                style="@style/detail_nav_txt"
+                android:src="@mipmap/detail_gift" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/msg_icon"
+                style="@style/detail_nav_icon"
+                android:src="@mipmap/detail_msg" />
+            <TextView
+                style="@style/detail_nav_txt"
+                android:id="@+id/msg_txt"
+                android:text="私信"
+                android:layout_below="@id/msg_icon" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/video_icon"
+                style="@style/detail_nav_icon"
+                android:src="@mipmap/detail_video" />
+            <TextView
+                style="@style/detail_nav_txt"
+                android:id="@+id/video_txt"
+                android:text="视频聊天"
+                android:layout_below="@id/video_icon" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

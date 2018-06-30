@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:background="@drawable/fg_my_list_border_bottom"
+    android:layout_height="wrap_content">
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/photo"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp"
+        android:scaleType="centerCrop"
+        android:layout_width="40dp"
+        fresco:roundedCornerRadius="5dp"
+        fresco:roundTopLeft="true"
+        fresco:roundTopRight="true"
+        fresco:roundBottomLeft="true"
+        fresco:roundBottomRight="true"
+        fresco:placeholderImage="@mipmap/timg"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/name"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/photo"
+        android:layout_alignParentTop="true"
+        android:text="火箭"
+        android:layout_width="wrap_content" />
+    <TextView
+        android:id="@+id/num"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/name"
+        android:layout_alignParentTop="true"
+        android:text="22"
+        android:layout_marginRight="3dp"
+        android:textSize="12sp"
+        style="@style/tab_menu_bgnum"
+        android:layout_width="wrap_content" />
+    <TextView
+        android:id="@+id/msg"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/photo"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/text_gray"
+        android:textSize="12sp"
+        android:text="就哭了监考老师解答顾客来说尕斯库勒个建设快乐过"
+        android:layout_width="wrap_content" />
+    <TextView
+        android:id="@+id/time"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/text_gray"
+        android:textSize="12sp"
+        android:text="12:12"
+        android:layout_width="wrap_content" />
+</RelativeLayout>

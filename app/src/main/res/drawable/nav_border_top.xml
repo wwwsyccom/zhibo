@@ -1,0 +1,17 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <layer-list>
+            <item
+                android:left="-3dp"
+                android:right="-3dp"
+                android:bottom="-3dp">
+                <shape>
+                    <solid android:color="@color/white"/>
+                    <stroke
+                        android:width="1px"
+                        android:color="#aaaaaa" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>
