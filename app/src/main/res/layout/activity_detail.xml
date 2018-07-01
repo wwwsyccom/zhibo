@@ -95,10 +95,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
+                        android:textSize="12sp"
                         android:text="好评度 90%"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
                         android:text="1000条评论>"/>
                 </LinearLayout>
                 <LinearLayout
@@ -121,11 +123,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
                         android:text="视频 100遇豆/分钟"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_marginBottom="8dp"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_width="20dp"
@@ -143,30 +145,80 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="12sp"
                         android:text="1000分钟"/>
                 </LinearLayout>
-                <LinearLayout
+            </LinearLayout>
+            <!--粉丝数-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="粉丝数"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100000"/>
+            </LinearLayout>
+            <!--收到礼物-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="收到礼物 (1000)"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_gift"
                     android:layout_width="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:src="@mipmap/detail_profile_tag"
-                        android:scaleType="centerCrop"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
-                        android:layout_height="20dp" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:text="个人标签"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1000分钟"/>
-                </LinearLayout>
+                    android:paddingBottom="20dp"
+                    android:layout_height="match_parent"/>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:paddingBottom="20dp"-->
+                    <!--android:layout_height="wrap_content">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="80dp"-->
+                        <!--android:background="@drawable/shape_corner"-->
+                        <!--android:layout_marginRight="15dp"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:paddingTop="10dp"-->
+                        <!--android:paddingBottom="5dp"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <!--<ImageView-->
+                            <!--android:layout_width="40dp"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:layout_marginBottom="10dp"-->
+                            <!--android:src="@mipmap/gift_flower"-->
+                            <!--android:layout_height="40dp" />-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:textSize="12sp"-->
+                            <!--android:text="鲜花"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:textColor="#af494b"-->
+                            <!--android:textSize="12sp"-->
+                            <!--android:layout_gravity="center_horizontal"-->
+                            <!--android:text="100" />-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -181,6 +233,7 @@
         android:background="@drawable/nav_border_top"
         android:layout_height="wrap_content">
         <RelativeLayout
+            android:id="@+id/send_gift"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content">
