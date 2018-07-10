@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ActivityPhoto">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:src="@mipmap/back_gray"
+        android:layout_height="wrap_content" />
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:src="@mipmap/timg"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/indexTxt"
+        android:layout_width="wrap_content"
+        android:text="1/2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:textSize="17sp"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
@@ -20,13 +21,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerAdapter extends PagerAdapter {
+public class ViewPagerSquareAdapter extends PagerAdapter {
     private Context mContext;
     private String[] mImages; // 图片链接数组
     private List<ImageView> mImageViews; // ImageView集合
     private Activity activity;
 
-    public ViewPagerAdapter(Context context, String[] images, Activity act){
+    public ViewPagerSquareAdapter(Context context, String[] images, Activity act){
         mContext = context;
         mImages = images;
         mImageViews = new ArrayList<>();
@@ -42,7 +43,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         Log.v("ooooooooo", imageUrls.length+"");
         // 根据图片资源数组填充ImageViews集合
         for(int i = 0 ; i < imageUrls.length ; i++){
-            final ImageView mImageView = new ImageView(mContext);
+            final SquareImageView mImageView = new SquareImageView(mContext);
             final int finalI = i;
             new Thread(){
                 public void run(){
@@ -55,8 +56,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                     });
                 }
             }.start();
-            mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            mImageView.setAdjustViewBounds(true);
+            mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             mImageViews.add(mImageView);
         }
 

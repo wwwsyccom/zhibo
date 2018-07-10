@@ -2,7 +2,6 @@ package com.syc.zhibo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -12,43 +11,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.syc.zhibo.update.DownLoadService;
-import com.syc.zhibo.update.manager.UpdateManager;
 import com.syc.zhibo.update.util.DeviceUtils;
 import com.syc.zhibo.update.util.ExternalPermissionUtils;
 import com.syc.zhibo.util.CommonProgressDialog;
-import com.syc.zhibo.util.okhttp.CallBackUtil;
-import com.syc.zhibo.util.okhttp.OkhttpUtil;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import okhttp3.Call;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageView findIcon;
@@ -63,10 +41,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Activity mContext;
 
     private FragmentManager fManager;
-    private HomeFragment fgHome;
-    private CircleFragment fgCircle;
-    private MsgFragment fgMsg;
-    private MyFragment fgMy;
+    private FgHome fgHome;
+    private FgCircle fgCircle;
+    private FgMsg fgMsg;
+    private FgMy fgMy;
 
     private MyReceiver receiver=null;
     private CommonProgressDialog pBar = null;
@@ -74,10 +52,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //设置状态栏背景和字体图标颜色
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M) {
+            //透明状态栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            //设置状态栏白色背景
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+            //设置状态栏字体图标颜色为深色
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         setContentView(R.layout.activity_main);
         mContext = this;
 
-//        startActivity(new Intent(this, DetailActivity.class));
 
         findIcon = (ImageView) findViewById(R.id.tab_menu_find_icon);
         circleIcon = (ImageView) findViewById(R.id.tab_menu_circle_icon);
@@ -173,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     find.setSelected(true);
                     findIcon.setSelected(true);
                     if(fgHome == null){
-                        fgHome = new HomeFragment();
+                        fgHome = new FgHome();
                         fTransaction.add(R.id.fg_wrapper,fgHome);
                     }else{
                         fTransaction.show(fgHome);
@@ -184,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     circle.setSelected(true);
                     circleIcon.setSelected(true);
                     if(fgCircle== null){
-                        fgCircle = new CircleFragment();
+                        fgCircle = new FgCircle();
                         fTransaction.add(R.id.fg_wrapper,fgCircle);
                     }else{
                         fTransaction.show(fgCircle);
@@ -196,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     msg.setSelected(true);
                     msgIcon.setSelected(true);
                     if(fgMsg== null){
-                        fgMsg= new MsgFragment();
+                        fgMsg= new FgMsg();
                         fTransaction.add(R.id.fg_wrapper,fgMsg);
                     }else{
                         fTransaction.show(fgMsg);
@@ -207,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     my.setSelected(true);
                     myIcon.setSelected(true);
                     if(fgMy== null){
-                        fgMy= new MyFragment();
+                        fgMy= new FgMy();
                         fTransaction.add(R.id.fg_wrapper,fgMy);
                     }else{
                         fTransaction.show(fgMy);

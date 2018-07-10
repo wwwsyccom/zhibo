@@ -18,7 +18,7 @@ import com.syc.zhibo.model.Msg;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MsgFragment extends Fragment{
+public class FgMsg extends Fragment{
     private RadioButton navMsg;
     private MsgAdapter adapter;
     private List<Msg> msgs = new ArrayList<Msg>();

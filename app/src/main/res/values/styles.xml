@@ -43,4 +43,9 @@
         <item name="android:background">@drawable/tab_menu_bgnum</item>
         <item name="android:textColor">#ffffff</item>
     </style>
+
+    <style name="statusBarStyle" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="android:statusBarColor">@color/blue2</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>
