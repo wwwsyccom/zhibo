@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,14 @@ public class HomeFragment extends Fragment implements RadioGroup.OnCheckedChange
 
         adapter = new HomeAdapter(users);
         listView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new HomeAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, User data) {
+                Log.d("oooooooooo, user data", data.getName());
+
+            }
+        });
 
         initData();
         initEvent();

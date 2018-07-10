@@ -1,25 +1,54 @@
 package com.syc.zhibo;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.style.UpdateAppearance;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.syc.zhibo.update.DownLoadService;
+import com.syc.zhibo.update.manager.UpdateManager;
+import com.syc.zhibo.update.util.DeviceUtils;
+import com.syc.zhibo.update.util.ExternalPermissionUtils;
+import com.syc.zhibo.util.CommonProgressDialog;
+import com.syc.zhibo.util.okhttp.CallBackUtil;
+import com.syc.zhibo.util.okhttp.OkhttpUtil;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageView findIcon;
@@ -31,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView msg;
     private TextView my;
     private TextView msgNum;
+    private Activity mContext;
 
     private FragmentManager fManager;
     private HomeFragment fgHome;
@@ -38,13 +68,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MsgFragment fgMsg;
     private MyFragment fgMy;
 
+    private MyReceiver receiver=null;
+    private CommonProgressDialog pBar = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
 
-
-        startActivity(new Intent(this, DetailActivity.class));
+//        startActivity(new Intent(this, DetailActivity.class));
 
         findIcon = (ImageView) findViewById(R.id.tab_menu_find_icon);
         circleIcon = (ImageView) findViewById(R.id.tab_menu_circle_icon);
@@ -70,6 +103,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //点亮首页图标
         find.performClick();
 
+//        checkUpdate(false);
+
+    }
+    public void showPbar(){
+        pBar = new CommonProgressDialog(MainActivity.this);
+        pBar.setCanceledOnTouchOutside(false);
+        pBar.setTitle("正在下载");
+        pBar.setCustomTitle(LayoutInflater.from(
+                MainActivity.this).inflate(
+                R.layout.title_dialog, null));
+        pBar.setMessage("正在下载");
+        pBar.setIndeterminate(true);
+        pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pBar.setCancelable(false);
+        pBar.show();
+        //注册广播接收器
+        receiver=new MyReceiver();
+        IntentFilter filter=new IntentFilter();
+        filter.addAction("com.syc.zhibo.update.DownLoadService");
+        MainActivity.this.registerReceiver(receiver,filter);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //检验是否获取权限，如果获取权限，外部存储会处于开放状态，会弹出一个toast提示获得授权
+                    String sdCard = Environment.getExternalStorageState();
+                    if (sdCard.equals(Environment.MEDIA_MOUNTED)){
+//                        Toast.makeText(this,"获得授权",Toast.LENGTH_LONG).show();
+                        this.startService(new Intent(this, DownLoadService.class));
+                        showPbar();
+                    }
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, "授权失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                break;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+    public class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle=intent.getExtras();
+            int percent =bundle.getInt("percent");
+            Log.d("ooooooo,percent=", percent+"");
+            pBar.setProgress(percent);
+            if(percent==100){
+                mContext.finish();
+            }
+        }
     }
     public void onClick(View view){
         FragmentTransaction fTransaction = fManager.beginTransaction();
@@ -149,4 +238,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(fgMy!= null)fragmentTransaction.hide(fgMy);
     }
 
+    public void checkUpdate(final boolean isToast) {
+        /**
+         * 在这里请求后台接口，获取更新的内容和最新的版本号
+         */
+        Log.d("ooooooooo", "checkupdate........");
+        // 版本的更新信息
+        String version_info = "更新内容\n" + "    1. 车位分享异常处理\n" + "    2. 发布车位折扣格式统一\n" + "    ";
+        int mVersion_code = DeviceUtils.getVersionCode(this);// 当前的版本号
+        int nVersion_code = 2;
+        if (mVersion_code < nVersion_code) {
+            // 显示提示对话
+            showNoticeDialog(version_info);
+        } else {
+            if (isToast) {
+                Toast.makeText(this, "已经是最新版本", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    /**
+     * 显示更新对话框
+     *
+     * @param version_info
+     */
+    private void showNoticeDialog(String version_info) {
+        AlertDialog.Builder mDialog = new AlertDialog.Builder(this);
+        mDialog.setTitle("版本更新");
+        mDialog.setMessage(version_info);
+        mDialog.setCancelable(false);
+        mDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                if (ExternalPermissionUtils.isGrantExternalRW(mContext, 1)) {
+                    mContext.startService(new Intent(mContext, DownLoadService.class));
+                    showPbar();
+                }
+            }
+        }).create().show();
+    }
 }

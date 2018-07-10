@@ -20,11 +20,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> implements View.OnClickListener{
     private List<User> users;
     private Bitmap imageBitMap;
     private Handler handler= new Handler();
-
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
@@ -46,6 +46,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fg_home_item,parent,false);
         ViewHolder holder = new ViewHolder(view);
+        //将创建的View注册点击事件
+        view.setOnClickListener(this);
         return holder;
     }
     @Override
@@ -54,6 +56,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         holder.name.setText(user.getName());
         holder.price.setText(user.getPrice()+"豆/分钟");
         holder.access.setText(user.getAccess()+"%接通率");
+
+        //将数据保存在itemView的Tag中，以便点击时进行获取
+        holder.itemView.setTag(users.get(position));
 
         // 构建Runnable对象，在runnable中更新界面
         final Runnable runnableUi=new Runnable(){
@@ -95,5 +100,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         }
         return bitmap;
     }
-
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view , User data);
+    }
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取数据
+            mOnItemClickListener.onItemClick(v,(User)v.getTag());
+        }
+    }
 }
