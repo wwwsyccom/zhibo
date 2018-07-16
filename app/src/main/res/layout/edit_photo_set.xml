@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/shape_corner_5dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:text="设置为封面"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/big_photo"
+            android:layout_width="match_parent"
+            android:text="查看大图"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center"
+            android:background="@drawable/border_top_bottom"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:text="删除"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/shape_corner_5dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:text="取消"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

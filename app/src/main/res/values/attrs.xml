@@ -5,8 +5,28 @@
         <attr name="strokeWidth" format="dimension"></attr>
         <attr name="image" format="reference"></attr>
         <attr name="isCircle" format="boolean"></attr>
-        <attr name="radius" format="dimension"></attr>
+        <!--<attr name="radius" format="dimension"></attr>-->
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
+    </declare-styleable>
+    <!--<declare-styleable name="ArrowLeftTextView">-->
+        <!--<attr name="radius" format="dimension" />-->
+        <!--<attr name="arrowWidth" format="dimension" />-->
+        <!--<attr name="arrowInHeight" format="dimension" />-->
+        <!--<attr name="bg" format="color" />-->
+    <!--</declare-styleable>-->
+    <declare-styleable name="BubbleView">
+        <attr name="arrowWidth" format="dimension" />
+        <attr name="angle" format="dimension" />
+        <attr name="arrowHeight" format="dimension" />
+        <attr name="arrowPosition" format="dimension" />
+        <attr name="bubbleColor" format="color" />
+        <attr name="arrowCenter" format="boolean" />
+        <attr name="arrowLocation" format="enum">
+            <enum name="left" value="0x00" />
+            <enum name="right" value="0x01" />
+            <enum name="top" value="0x02" />
+            <enum name="bottom" value="0x03" />
+        </attr>
     </declare-styleable>
 </resources>

@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        startActivity(new Intent(this, ActivityEdit.class));
+
         super.onCreate(savedInstanceState);
         //设置状态栏背景和字体图标颜色
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M) {
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fManager = getFragmentManager();
         //点亮首页图标
-        find.performClick();
+        msg.performClick();
 
 //        checkUpdate(false);
 

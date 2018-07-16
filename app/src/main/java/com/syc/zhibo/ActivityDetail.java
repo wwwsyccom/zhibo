@@ -90,6 +90,7 @@ public class ActivityDetail extends AppCompatActivity{
             }
         });
 
+        //设置小图
         LinearLayout wrap = (LinearLayout) findViewById(R.id.photo_small_wrapper2);
         for(int i=0;i<photos.length;i++){
             SquareImageView image = new SquareImageView(this);
@@ -134,12 +135,6 @@ public class ActivityDetail extends AppCompatActivity{
         initData();
 
     }
-    public void setWindowAlpha(float bgAlpha)
-    {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = bgAlpha; //0.0-1.0
-        getWindow().setAttributes(lp);
-    }
     private void showPopupWindow() {
         WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
@@ -147,14 +142,15 @@ public class ActivityDetail extends AppCompatActivity{
         width = (int) (width*0.9);
 
         View view = LayoutInflater.from(this).inflate(R.layout.gift,null);
+//        RelativeLayout rl = (RelativeLayout)LayoutInflater.from(this).inflate(R.layout.gift,null);
+//        rl.findViewById(R.id.****);
         popupWindow= new PopupWindow(view,
                 width, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setContentView(view);
         View rootview = LayoutInflater.from(this).inflate(R.layout.activity_detail, null);
         popupWindow.setAnimationStyle(R.style.contextMenuAnim);
         popupWindow.showAtLocation(rootview, Gravity.BOTTOM,0,200);
-
-        setWindowAlpha(0.5f);
+        Util.setWindowAlpha(this,0.5f);
         popupWindow.setOnDismissListener(new poponDismissListener());
 
         RecyclerView listView = (RecyclerView) view.findViewById(R.id.gift_wrap);
@@ -170,9 +166,8 @@ public class ActivityDetail extends AppCompatActivity{
     class poponDismissListener implements PopupWindow.OnDismissListener{
         @Override
         public void onDismiss() {
-            setWindowAlpha(1f);
+            Util.setWindowAlpha(act,1f);
         }
-
     }
 //    class GiftItemDecoration extends RecyclerView.ItemDecoration {
 //        private int space;

@@ -4,4 +4,5 @@
     <external-path
         name="files_root"
         path="Android/data/com.syc.zhibo/" />
+    <external-path name="external_files" path="."/>
 </paths>

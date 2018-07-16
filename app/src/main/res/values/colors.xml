@@ -20,5 +20,6 @@
     <color name="tab_menu_text_blue">#0092EE</color>
     <color name="text_topbar">#694E42</color>
     <color name="div_white">#E5E5E5</color>
+    <color name="msg_back_light">#F4F8FB</color>
 
 </resources>
