@@ -6,6 +6,7 @@
     <color name="blue2">#727983</color>
     <color name="colorPrimary">#0092EE</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryRed">#F86969</color>
     <color name="colorAccent">#FF4081</color>
     <color name="tab_checked">#ED6A2C</color>
     <color name="tab_unchecked">#757575</color>
@@ -21,5 +22,6 @@
     <color name="text_topbar">#694E42</color>
     <color name="div_white">#E5E5E5</color>
     <color name="msg_back_light">#F4F8FB</color>
+
 
 </resources>

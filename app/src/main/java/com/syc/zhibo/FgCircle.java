@@ -1,12 +1,14 @@
 package com.syc.zhibo;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +43,15 @@ public class FgCircle extends Fragment implements RadioGroup.OnCheckedChangeList
         mSwipeRefreshView.setProBar((ProgressBar)view.findViewById(R.id.probar));
         RecyclerView listView = (RecyclerView) view.findViewById(R.id.list);
         listView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        adapter = new CircleAdapter(circles);
+        adapter = new CircleAdapter(circles, getActivity());
         listView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new CircleAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Circle data) {
+                startActivity(new Intent(getActivity(), ActivityCircleDetail.class));
+            }
+        });
 
         initData();
         initEvent();

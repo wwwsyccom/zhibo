@@ -2,8 +2,10 @@ package com.syc.zhibo.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.syc.zhibo.ActivityPhoto;
 import com.syc.zhibo.util.SquareImageView;
 
 import java.io.IOException;
@@ -58,6 +61,19 @@ public class ViewPagerSquareAdapter extends PagerAdapter {
             }.start();
             mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             mImageViews.add(mImageView);
+            final int finalI1 = i;
+            mImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("ooooooooooo", "clicked...."+ finalI);
+                    Intent intent = new Intent(activity, ActivityPhoto.class);
+                    Bundle bd = new Bundle();
+                    bd.putInt("index", finalI1);
+                    bd.putStringArray("photos", imageUrls);
+                    intent.putExtras(bd);
+                    activity.startActivity(intent);
+                }
+            });
         }
 
         // ImageViews集合中的图片个数在[2,3]时会存在问题，递归再次填充一遍

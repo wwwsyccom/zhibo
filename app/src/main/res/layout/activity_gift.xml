@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/back"
+    tools:context=".ActivityGift">
+    <!--顶部导航-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_height="45dp">
+        <RadioGroup
+            android:id="@+id/nav_group"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+            <RadioButton
+                android:id="@+id/receive"
+                style="@style/fg_home_nav_item"
+                android:button="@null"
+                android:text="收到礼物">
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/give"
+                style="@style/fg_home_nav_item"
+                android:button="@null"
+                android:text="送出礼物">
+            </RadioButton>
+        </RadioGroup>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tip1"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:text="共收到10件礼物"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tip2"
+            android:layout_width="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:text="点击礼物可查看礼物来源"
+            android:layout_height="wrap_content" />
+
+        <!--礼物列表-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_gift"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="20dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</LinearLayout>

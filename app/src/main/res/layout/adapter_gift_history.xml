@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingLeft="10dp"
+    android:background="@drawable/border_bottom_2px"
+    android:paddingRight="10dp"
+    android:layout_height="76dp">
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="60dp"
+        android:layout_marginRight="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/timg"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_height="60dp"/>
+    <TextView
+        android:id="@+id/name"
+        android:text="小女生 女 20"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/photo"
+        android:layout_alignTop="@+id/photo"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/consume"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/photo"
+        android:layout_centerVertical="true"
+        android:textSize="12sp"
+        android:text="消费100豆赠送100个鲜花"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/photo"
+        android:layout_alignBottom="@+id/photo"
+        android:textSize="12sp"
+        android:text="2010-10-10 10:10:10"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

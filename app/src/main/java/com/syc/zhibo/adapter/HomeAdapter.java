@@ -35,7 +35,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             price = (TextView) view.findViewById(R.id.price);
-            access = (TextView) view.findViewById(R.id.access);
+//            access = (TextView) view.findViewById(R.id.access);
             photo = (ImageView) view.findViewById(R.id.photo);
         }
     }
@@ -55,7 +55,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
         final User user = users.get(position);
         holder.name.setText(user.getName());
         holder.price.setText(user.getPrice()+"豆/分钟");
-        holder.access.setText(user.getAccess()+"%接通率");
+//        holder.access.setText(user.getAccess()+"%接通率");
 
         //将数据保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(users.get(position));
@@ -100,7 +100,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
         }
         return bitmap;
     }
-    public static interface OnRecyclerViewItemClickListener {
+    public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view , User data);
     }
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {

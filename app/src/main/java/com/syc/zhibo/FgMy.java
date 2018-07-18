@@ -1,11 +1,13 @@
 package com.syc.zhibo;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -21,6 +23,14 @@ public class FgMy extends Fragment{
         }catch (Exception e){
             e.printStackTrace();
         }
+        TextView edit = (TextView) view.findViewById(R.id.edit);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityEdit.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

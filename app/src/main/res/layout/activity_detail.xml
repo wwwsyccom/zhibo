@@ -13,10 +13,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <!--顶部大图-->
-            <com.syc.zhibo.util.SquareViewPager
-                android:id="@+id/photo_pager"
+            <com.syc.zhibo.util.SquareRelLay
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <com.syc.zhibo.util.SquareViewPager
+                    android:id="@+id/photo_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <RelativeLayout
+                    android:id="@+id/concern_wrap"
+                    android:layout_width="85dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="55dp">
+                    <TextView
+                        android:id="@+id/concern"
+                        android:layout_width="55dp"
+                        android:background="@drawable/detail_concern"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="关注"
+                        android:textColor="@color/detail_concern"
+                        android:gravity="center"
+                        android:layout_height="25dp" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="40dp"
+                    android:textSize="12sp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/white"
+                    android:text="柠檬"
+                    android:background="@drawable/detail_name_back"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/sex"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="12sp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/white"
+                    android:text="女 20岁 北京"
+                    android:background="@drawable/detail_name_back"
+                    android:layout_height="wrap_content" />
+            </com.syc.zhibo.util.SquareRelLay>
             <!--小图片区-->
             <HorizontalScrollView
                 android:id="@+id/photo_small_wrapper"
@@ -61,47 +116,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:textSize="12sp"
-                        android:textColor="@color/text_gray"
+                        android:textColor="@color/colorPrimaryDark"
                         android:layout_gravity="center"
                         android:text="发表 9 >"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="30dp"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:textSize="12sp"
-                        android:textColor="@color/text_gray"
+                        android:textColor="@color/colorPrimaryDark"
                         android:layout_gravity="center"
                         android:text="照片 9 >"
                         android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:src="@mipmap/detail_profile_comment"
-                        android:scaleType="centerCrop"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
-                        android:layout_height="20dp" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:gravity="start"
-                        android:text="通话评价"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:textSize="12sp"
-                        android:text="好评度 90%"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="1000条评论>"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

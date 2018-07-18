@@ -8,6 +8,8 @@ import android.media.ExifInterface;
 import android.os.Environment;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -136,7 +138,14 @@ public class PhotoBitmapUtils {
         int angle = readPictureDegree(originpath);
 
         // 把原图压缩后得到Bitmap对象
-        Bitmap bmp = getCompressPhoto(originpath);;
+//        Bitmap bmp = getCompressPhoto(originpath);
+        Bitmap bmp = null;
+        try {
+            FileInputStream fis = new FileInputStream(originpath);
+            bmp = BitmapFactory.decodeStream(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // 修复图片被旋转的角度
         Bitmap bitmap = rotaingImageView(angle, bmp);

@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.syc.zhibo.update.DownLoadService;
 import com.syc.zhibo.update.util.DeviceUtils;
 import com.syc.zhibo.update.util.ExternalPermissionUtils;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        startActivity(new Intent(this, ActivityEdit.class));
+        startActivity(new Intent(this, ActivityWithdrawChoose.class));
 
         super.onCreate(savedInstanceState);
         //设置状态栏背景和字体图标颜色
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fManager = getFragmentManager();
         //点亮首页图标
-        msg.performClick();
+        circle.performClick();
 
 //        checkUpdate(false);
 

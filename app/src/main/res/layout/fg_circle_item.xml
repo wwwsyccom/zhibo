@@ -11,6 +11,7 @@
     android:layout_marginBottom="15dp"
     android:layout_height="wrap_content">
     <RelativeLayout
+        android:id="@+id/photo_wrap"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content">
@@ -33,16 +34,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:textColor="@color/text_gray"
+            android:layout_centerVertical="true"
             android:text="火箭"
             android:layout_toRightOf="@id/photo" />
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/name"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:textColor="@color/text_gray"
-            android:text="10:00"
-            android:layout_toRightOf="@id/photo" />
+            android:text="10:00"/>
     </RelativeLayout>
     <TextView
         android:id="@+id/msg"

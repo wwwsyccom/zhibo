@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.syc.zhibo.adapter.HomeAdapter;
 import com.syc.zhibo.model.User;
 import com.syc.zhibo.util.SwipeRefreshView;
@@ -39,6 +40,7 @@ public class FgHome extends Fragment implements RadioGroup.OnCheckedChangeListen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Fresco.initialize(getActivity());
         View view = inflater.inflate(R.layout.fg_home,container,false);
         navGroup = (RadioGroup) view.findViewById(R.id.nav_group);
         navRecommend = (RadioButton) view.findViewById(R.id.nav_recommend);
@@ -61,8 +63,8 @@ public class FgHome extends Fragment implements RadioGroup.OnCheckedChangeListen
         adapter.setOnItemClickListener(new HomeAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, User data) {
-            Log.d("oooooooooo, user data", data.getName());
-            startActivity(new Intent(getActivity(), ActivityDetail.class));
+                Log.d("oooooooooo, user data", data.getName());
+                startActivity(new Intent(getActivity(), ActivityDetail.class));
             }
         });
 

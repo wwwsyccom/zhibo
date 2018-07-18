@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.syc.zhibo.adapter.GiftAdapter;
 import com.syc.zhibo.adapter.GiftSendAdapter;
@@ -88,8 +89,9 @@ public class ActivityDetail extends AppCompatActivity{
                 }
 
             }
-        });
 
+
+        });
         //设置小图
         LinearLayout wrap = (LinearLayout) findViewById(R.id.photo_small_wrapper2);
         for(int i=0;i<photos.length;i++){
@@ -124,7 +126,22 @@ public class ActivityDetail extends AppCompatActivity{
             }
         });
 
-
+        //点击关注
+        RelativeLayout concernWrap = (RelativeLayout)findViewById(R.id.concern_wrap);
+        final TextView concern = (TextView) findViewById(R.id.concern);
+        concernWrap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(concern.isSelected()){
+                    concern.setSelected(false);
+                    concern.setText("关注");
+                }else{
+                    concern.setSelected(true);
+                    concern.setText("已关注");
+                }
+            }
+        });
+        Log.d("ooooo", "concern selected is "+concern.isSelected());
 
         //收到礼物
         RecyclerView listView = (RecyclerView) findViewById(R.id.list_gift);
@@ -141,8 +158,8 @@ public class ActivityDetail extends AppCompatActivity{
         int width = wm.getDefaultDisplay().getWidth();  //屏幕宽度
         width = (int) (width*0.9);
 
-        View view = LayoutInflater.from(this).inflate(R.layout.gift,null);
-//        RelativeLayout rl = (RelativeLayout)LayoutInflater.from(this).inflate(R.layout.gift,null);
+        View view = LayoutInflater.from(this).inflate(R.layout.gift_pop,null);
+//        RelativeLayout rl = (RelativeLayout)LayoutInflater.from(this).inflate(R.layout.gift_pop,null);
 //        rl.findViewById(R.id.****);
         popupWindow= new PopupWindow(view,
                 width, ViewGroup.LayoutParams.WRAP_CONTENT, true);

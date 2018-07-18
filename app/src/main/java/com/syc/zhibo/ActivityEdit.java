@@ -4,17 +4,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -42,21 +43,21 @@ import com.syc.zhibo.util.PhotoBitmapUtils;
 import com.syc.zhibo.util.SquareImageView;
 import com.syc.zhibo.util.Util;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class ActivityEdit extends AppCompatActivity {
     private Activity act;
     public AMapLocationClient mLocationClient = null;
     private final int SDK_PERMISSION_REQUEST = 127;
-    private final int REQUEST_CAREMA = 1;
-    private final int REQUEST_FILE = 2;
+    private final int REQUEST_CAREMA_pm = 1;
+    private final int REQUEST_FILE_pm = 2;  //调用相机，读取文件权限
+    private final int REQUEST_ALBUM_PM = 3;  //读取相册权限
     private final int REQUEST_ALBUM= 3;
     private TextView birthday;
     private  TextView name;
@@ -103,9 +104,11 @@ public class ActivityEdit extends AppCompatActivity {
         ///权限允许后，开始定位
         if(requestCode==SDK_PERMISSION_REQUEST){
             getLocation();
-        }else if(requestCode==REQUEST_CAREMA){
-        }else if(requestCode==REQUEST_FILE){ //调用相机，创建文件
+        }else if(requestCode== REQUEST_CAREMA_pm){
+        }else if(requestCode== REQUEST_FILE_pm){ //调用相机，创建文件
             takePhoto24();
+        }else if(requestCode==REQUEST_ALBUM_PM){    //调用相册
+            choosePhoto();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -254,26 +257,101 @@ public class ActivityEdit extends AppCompatActivity {
             }
         }else if(requestCode==CODE_TAKE_PHOTO && resultCode==RESULT_OK){    //照相
             photoTop = (SquareImageView) findViewById(R.id.photo_top);
-            String photoPath2 = PhotoBitmapUtils.amendRotatePhoto(photoPath, act);
+            int degree = readPictureDegree(photoPath);
+            Bitmap bitmap = null;
+//            String photoPath2 = PhotoBitmapUtils.amendRotatePhoto(photoPath, act);
 
             if (Build.VERSION.SDK_INT >= 24){
                 Log.d("ooooooo,photoUri", "="+photoUri+"");
-                Bitmap bitmap = null;
                 try {
-                    photoUri = FileProvider.getUriForFile(this, getPackageName()+".fileProvider", new File(photoPath2));
+                    photoUri = FileProvider.getUriForFile(this, getPackageName()+".fileProvider", new File(photoPath));
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(photoUri));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                photoTop.setImageBitmap(bitmap);
             }else {
-                Bitmap bitmap = BitmapFactory.decodeFile(photoPath2);
-                photoTop.setImageBitmap(bitmap);
+                bitmap = BitmapFactory.decodeFile(photoPath);
             }
+            bitmap = rotateBitmap(bitmap, degree);
+            photoTop.setImageBitmap(bitmap);
         }else if(requestCode==REQUEST_ALBUM&& resultCode==RESULT_OK){
-
+            photoTop = (SquareImageView) findViewById(R.id.photo_top);
+            Log.d("ooooooooooo", "album....");
+            try {
+                Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String path = cursor.getString(columnIndex); //获取照片路径
+                cursor.close();
+//                String path2 = PhotoBitmapUtils.amendRotatePhoto(path, act);
+//                Bitmap bitmap = BitmapFactory.decodeFile(path2);
+//                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                int degree = readPictureDegree(path);
+                Bitmap bitmap = null;
+                try {
+                    FileInputStream fis = new FileInputStream(path);
+                    bitmap= BitmapFactory.decodeStream(fis);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                bitmap = rotateBitmap(bitmap, degree);
+                photoTop.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                // TODO Auto-generatedcatch block
+                e.printStackTrace();
+            }
         }
     }
+    /**
+     * 旋转图片，使图片保持正确的方向。
+     *
+     * @param bitmap  原始图片
+     * @param degrees 原始图片的角度
+     * @return Bitmap 旋转后的图片
+     */
+    public static Bitmap rotateBitmap(Bitmap bitmap, int degrees) {
+        if (degrees == 0 || null == bitmap) {
+            return bitmap;
+        }
+        Matrix matrix = new Matrix();
+        matrix.setRotate(degrees, bitmap.getWidth() / 2, bitmap.getHeight() / 2);
+        Bitmap bmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        return bmp;
+    }
+
+
+    /**
+     * 读取图片属性：旋转的角度
+     *
+     * @param path 拍摄图片的完整路径
+     * @return degree旋转的角度
+     */
+    public static int readPictureDegree(String path) {
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return degree;
+        }
+        return degree;
+    }
+
     private void showEditPhoto(){
         WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
@@ -281,7 +359,7 @@ public class ActivityEdit extends AppCompatActivity {
         width = (int) (width*0.8);
 
         LinearLayout ll = (LinearLayout)LayoutInflater.from(this).inflate(R.layout.edit_photo_set,null);
-//        RelativeLayout rl = (RelativeLayout)LayoutInflater.from(this).inflate(R.layout.gift,null);
+//        RelativeLayout rl = (RelativeLayout)LayoutInflater.from(this).inflate(R.layout.gift_pop,null);
 //        rl.findViewById(R.id.****);
         final PopupWindow popupWindow= new PopupWindow(ll,
                 width, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -369,7 +447,7 @@ public class ActivityEdit extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= 24) {
                     //判断是否有存取文件权限
                     if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(act, new String[]{android .Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_FILE);
+                        ActivityCompat.requestPermissions(act, new String[]{android .Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_FILE_pm);
                     }else{
                         takePhoto24();
                     }
@@ -390,12 +468,18 @@ public class ActivityEdit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                Intent intent = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, REQUEST_ALBUM);
+                //检查权限
+                if (ContextCompat.checkSelfPermission(act, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(act, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_ALBUM_PM);
+                }else {
+                    choosePhoto();
+                }
             }
         });
+    }
+    public void choosePhoto(){
+        Intent intent = new Intent( Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_ALBUM);
     }
     public void takePhoto24(){
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cameraZb");
